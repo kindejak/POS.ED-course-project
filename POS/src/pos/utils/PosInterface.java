@@ -1,53 +1,67 @@
 package pos.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Interface between the POS app and the UI
- * Defines requested functionality
- *
- * @author Jakub Kindermann
+ * The interface Pos interface.
  */
 public interface PosInterface {
 
     /**
-     * Creates product.
-     *
-     * @return the product created
+     * allows binary files or JSON files to be loaded
+     * @param path Absolute path in form of string
+     * @return boolean; true if successful
      */
-    public Product createProduct();
+    public void loadFile(String path,String type) throws IOException, ClassNotFoundException;
 
     /**
-     * Edit product of chosen id.
-     *
-     * @param id            id of the product in database
-     * @param editedProduct the edited product
-     * @return the product in edited form
+     * allows binary files or JSON files to be saved
+     * @param path Absolute path in form of string
+     * @return boolean; true if successful
      */
-    public Product editProduct(int id, Product editedProduct);
+    public void saveFile(String path,String type) throws IOException;]
 
     /**
-     * Remove product boolean.
+     * Create product.
      *
-     * @param id id of the product in database
-     * @return the boolean; if product was removed returns true
+     * @param attributes information about attributes are stored like this: id:"int",name:"String",description:"String",price:"double",stock:"int"
+     * @return the product
+     */
+    public Product createProduct(String attributes);
+
+    /**
+     * Edit product.
+     *
+     * @param product    the product
+     * @param attributes the attributes information about attributes are stored like this: id:"int",name:"String",description:"String",price:"double",stock:"int"
+     * @return the product
+     */
+    public Product editProduct(Product product, String attributes);
+
+    /**
+     * Remove product returns boolean.
+     *
+     * @param id the id of product
+     * @return the boolean
      */
     public boolean removeProduct(int id);
-
 
     /**
      * Gets product.
      *
-     * @param id the id
+     * @param id the id of product
      * @return the product
      */
     public Product getProduct(int id);
 
     /**
-     * Search product by name of the product.
+     * Search product by name array list.
      *
-     * @param name the name of product
-     * @return the product list
+     * @param name the name
+     * @return the array list
      */
     public ArrayList<Product> searchProductByName(String name);
 
@@ -61,22 +75,24 @@ public interface PosInterface {
     /**
      * Create order order.
      *
+     * @param attributes the attributes
      * @return the order
      */
-    public Order createOrder();
+    public Order createOrder(String attributes);
 
     /**
      * Edit order order.
      *
-     * @param id of the product in database
+     * @param id         the id
+     * @param attributes the attributes
      * @return the order
      */
-    public Order editOrder(int id);
+    public Order editOrder(int id,String attributes);
 
     /**
      * Cancel order boolean.
      *
-     * @param id of the product in database
+     * @param id the id
      * @return the boolean
      */
     public boolean cancelOrder(int id);
@@ -84,7 +100,7 @@ public interface PosInterface {
     /**
      * Search order order.
      *
-     * @param id of the product in database
+     * @param id the id
      * @return the order
      */
     public Order searchOrder(int id);
@@ -99,15 +115,17 @@ public interface PosInterface {
     /**
      * Process order boolean.
      *
+     * @param order the order
      * @return the boolean
      */
-    public boolean processOrder();
+    public boolean processOrder(Order order);
 
     /**
-     * Prints receipt bof.
+     * Print receipt boolean.
      *
-     * @return the boolean; if order was printed returns true
+     * @param order the order
+     * @return the boolean
      */
-    public boolean printReceipt();
+    public boolean printReceipt(Order order);
 }
 
