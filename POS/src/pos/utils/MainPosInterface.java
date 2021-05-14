@@ -1,45 +1,46 @@
 package pos.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import pos.app.Order;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * The interface Pos interface.
  */
-public interface PosInterface {
+public interface MainPosInterface {
 
     /**
-     * allows binary files or JSON files to be loaded
+     * allows binary files or CSV files to be loaded
      * @param path Absolute path in form of string
      * @return boolean; true if successful
      */
-    public void loadFile(String path,String type) throws IOException, ClassNotFoundException;
+    void loadFile(String path, String type) throws IOException, ClassNotFoundException;
 
     /**
-     * allows binary files or JSON files to be saved
+     * allows binary files or CSV files to be saved
      * @param path Absolute path in form of string
+     * @param type can be set to "order" or "product"
      * @return boolean; true if successful
      */
-    public void saveFile(String path,String type) throws IOException;]
+    void saveFile(String path, String type) throws IOException, ClassNotFoundException;
 
     /**
      * Create product.
      *
-     * @param attributes information about attributes are stored like this: id:"int",name:"String",description:"String",price:"double",stock:"int"
+     * @param attributes information about attributes are stored like this: name=String;description=String;price=double;stock=int;vat=int
      * @return the product
      */
-    public Product createProduct(String attributes);
+    String createProduct(String attributes);
 
     /**
      * Edit product.
      *
-     * @param product    the product
-     * @param attributes the attributes information about attributes are stored like this: id:"int",name:"String",description:"String",price:"double",stock:"int"
+     * @param id   id of the product
+     * @param attributes the attributes information about attributes are stored like this: name=String;description=String;price=double;stock=int;vat=int
      * @return the product
      */
-    public Product editProduct(Product product, String attributes);
+    String editProduct(int id, String attributes);
 
     /**
      * Remove product returns boolean.
@@ -47,7 +48,7 @@ public interface PosInterface {
      * @param id the id of product
      * @return the boolean
      */
-    public boolean removeProduct(int id);
+    boolean removeProduct(int id);
 
     /**
      * Gets product.
@@ -55,7 +56,7 @@ public interface PosInterface {
      * @param id the id of product
      * @return the product
      */
-    public Product getProduct(int id);
+    String getProduct(int id);
 
     /**
      * Search product by name array list.
@@ -63,31 +64,32 @@ public interface PosInterface {
      * @param name the name
      * @return the array list
      */
-    public ArrayList<Product> searchProductByName(String name);
+    String searchProductByName(String name);
 
     /**
      * Gets products list.
      *
      * @return the products list
      */
-    public ArrayList<Product> getProductsList();
+    String getAllProducts();
 
     /**
      * Create order order.
      *
-     * @param attributes the attributes
+     *
+     * @param idOfProductsToOrder
      * @return the order
      */
-    public Order createOrder(String attributes);
+    String createOrder(ArrayList<Integer> idOfProductsToOrder);
 
     /**
      * Edit order order.
      *
      * @param id         the id
-     * @param attributes the attributes
+     * @param idOfProductsToOrder
      * @return the order
      */
-    public Order editOrder(int id,String attributes);
+    String editOrder(int id, ArrayList<Integer> idOfProductsToOrder);
 
     /**
      * Cancel order boolean.
@@ -95,22 +97,22 @@ public interface PosInterface {
      * @param id the id
      * @return the boolean
      */
-    public boolean cancelOrder(int id);
+    boolean cancelOrder(int id);
 
     /**
      * Search order order.
      *
-     * @param id the id
+     * @param numberOfOrders the id
      * @return the order
      */
-    public Order searchOrder(int id);
+    String getLastOrders(int numberOfOrders);
 
     /**
      * Gets orders list.
      *
      * @return the orders list
      */
-    public ArrayList<Order> getOrdersList();
+    String getAllOrders();
 
     /**
      * Process order boolean.
@@ -118,7 +120,7 @@ public interface PosInterface {
      * @param order the order
      * @return the boolean
      */
-    public boolean processOrder(Order order);
+    boolean processOrder(Order order);
 
     /**
      * Print receipt boolean.
@@ -126,6 +128,6 @@ public interface PosInterface {
      * @param order the order
      * @return the boolean
      */
-    public boolean printReceipt(Order order);
+    boolean printReceipt(Order order);
 }
 
