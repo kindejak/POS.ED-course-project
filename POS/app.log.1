@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2021-05-26T11:29:25</date>
+  <millis>1622021365928</millis>
+  <sequence>0</sequence>
+  <logger>pos.ui.TextUI</logger>
+  <level>INFO</level>
+  <class>pos.ui.TextUI</class>
+  <method>cashRegisterMenu</method>
+  <thread>1</thread>
+  <message>Non-valid number was entered.</message>
+  <exception>
+    <message>java.lang.NumberFormatException: For input string: "14648645325135"</message>
+    <frame>
+      <class>java.lang.NumberFormatException</class>
+      <method>forInputString</method>
+      <line>65</line>
+    </frame>
+    <frame>
+      <class>java.lang.Integer</class>
+      <method>parseInt</method>
+      <line>583</line>
+    </frame>
+    <frame>
+      <class>java.lang.Integer</class>
+      <method>parseInt</method>
+      <line>615</line>
+    </frame>
+    <frame>
+      <class>pos.app.App</class>
+      <method>createOrder</method>
+      <line>231</line>
+    </frame>
+    <frame>
+      <class>pos.ui.TextUI</class>
+      <method>cashRegisterMenu</method>
+      <line>89</line>
+    </frame>
+    <frame>
+      <class>pos.ui.TextUI</class>
+      <method>main</method>
+      <line>56</line>
+    </frame>
+  </exception>
+</record>
+<record>
+  <date>2021-05-26T11:29:42</date>
+  <millis>1622021382935</millis>
+  <sequence>1</sequence>
+  <logger>pos.ui.TextUI</logger>
+  <level>INFO</level>
+  <class>pos.ui.TextUI</class>
+  <method>cashRegisterMenu</method>
+  <thread>1</thread>
+  <message>Problem with printing bill occurred.Printing Failed.</message>
+  <exception>
+    <message>java.awt.print.PrinterException: Printing Failed.</message>
+    <frame>
+      <class>pos.app.Print</class>
+      <method>PrintReceipt</method>
+      <line>47</line>
+    </frame>
+    <frame>
+      <class>pos.app.App</class>
+      <method>printReceipt</method>
+      <line>360</line>
+    </frame>
+    <frame>
+      <class>pos.ui.TextUI</class>
+      <method>cashRegisterMenu</method>
+      <line>97</line>
+    </frame>
+    <frame>
+      <class>pos.ui.TextUI</class>
+      <method>main</method>
+      <line>56</line>
+    </frame>
+  </exception>
+</record>
