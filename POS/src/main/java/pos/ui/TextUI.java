@@ -241,7 +241,12 @@ public class TextUI {
                     break;
                 case 3:
                     System.out.println("Remove product - Enter ID of product");
-                    app.removeProduct(sc.nextInt());
+                    try {
+                        choice = Integer.parseInt(sc.nextLine());
+                        app.removeProduct(choice);
+                    } catch (NoSuchElementException e) {
+                        logger.log(Level.INFO, "Product of this ID does not exists.");
+                    }
                     break;
                 case 4:
                     String ean = sc.nextLine();
