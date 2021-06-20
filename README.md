@@ -89,6 +89,6 @@ Aplikace POS.ED je jednoduchou POS aplikací. Tento projekt byl vypracován pro 
      <version>2.12.3</version>  
      </dependency>  
     </dependencies>
+## [Testy](TESTS.md)
 
-## Testování
-![](./img/test)
+
