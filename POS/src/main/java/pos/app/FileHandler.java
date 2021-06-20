@@ -2,16 +2,13 @@ package pos.app;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-public class FileHandler implements Serializable {
+public class FileHandler extends App implements Serializable {
     File file;
 
     public static void main(String[] args) {
@@ -34,24 +31,10 @@ public class FileHandler implements Serializable {
 
     public ArrayList<Order> loadOrdersBin() throws IOException, ClassNotFoundException {
         if (!file.exists()) throw new FileNotFoundException("File doesn't exists.");
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ArrayList<Order> orderArrayList = (ArrayList<Order>) ois.readObject();
-            return orderArrayList;
-        }   catch (FileNotFoundException e){
-
-            e.printStackTrace();
-        }
-        catch (IOException e){
-
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e){
-
-            e.printStackTrace();
-        }
-        return null;
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        ArrayList<Order> orderArrayList = (ArrayList<Order>) ois.readObject();
+        return orderArrayList;
     }
     public ArrayList<Order> loadOrdersJson() throws IOException, ClassNotFoundException {
         ObjectMapper mapper = new ObjectMapper()
@@ -77,28 +60,14 @@ public class FileHandler implements Serializable {
 
     public ArrayList<Product> loadProductsBin() throws IOException, ClassNotFoundException {
         if (!file.exists()) throw new FileNotFoundException("File doesn't exists.");
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            return (ArrayList<Product>) ois.readObject();
-        } catch (FileNotFoundException e){
-
-            e.printStackTrace();
-        }
-        catch (IOException e){
-
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e){
-
-            e.printStackTrace();
-        }
-        return null;
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        return (ArrayList<Product>) ois.readObject();
     }
     public ArrayList<Product> loadProductsJson() throws IOException, ClassNotFoundException {
         ObjectMapper mapper = new ObjectMapper()
         .registerModule(new JavaTimeModule());
-        // `java.time.LocalDateTime` not supported by default Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" enables to work properly
+        // `java.time.LocalDateTime` not supported by default. Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" enables to work properly
         List<Product> products = mapper.reader()
                 .forType(new TypeReference<List<Product>>() {})
                 .readValue(file);

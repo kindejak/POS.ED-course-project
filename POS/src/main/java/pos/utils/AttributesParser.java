@@ -2,15 +2,15 @@ package pos.utils;
 
 import pos.app.Product;
 
-public class AttributesParser {
+public class AttributesParser extends Product {
 
 
-    private static final int ATTRIBUTE_NAME_LENGTH0 = 5;
-    private static final int ATTRIBUTE_NAME_LENGTH1 = 12;
-    private static final int ATTRIBUTE_NAME_LENGTH2 = 6;
-    private static final int ATTRIBUTE_NAME_LENGTH3 = 6;
-    private static final int ATTRIBUTE_NAME_LENGTH4 = 4;
-    private static final int ATTRIBUTE_NAME_LENGTH5 = 4;
+    public static final int ATTRIBUTE_NAME_LENGTH0 = 5;
+    public static final int ATTRIBUTE_NAME_LENGTH1 = 12;
+    public static final int ATTRIBUTE_NAME_LENGTH2 = 6;
+    public static final int ATTRIBUTE_NAME_LENGTH3 = 6;
+    public static final int ATTRIBUTE_NAME_LENGTH4 = 4;
+    public static final int ATTRIBUTE_NAME_LENGTH5 = 4;
     // name=String;description=String;price=double;stock=int;vat=int
     public static void editProduct(Product product, String attributes){
         String[] splitAttributes = attributes.split(";");

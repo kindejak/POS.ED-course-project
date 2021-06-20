@@ -3,35 +3,30 @@ package pos.app;
 import java.awt.*;
 import java.awt.print.*;
 
-public class Print implements Printable {
+public class Print extends App implements Printable {
 
         // Attributes..
         private PrinterJob printerJob;
         private PageFormat pageFormat;
         private Paper paper;
+        private String header;
+        private String body;
 
         private final int MARGIN = 1;
 
-        public void PrintReceipt() throws PrinterException {
+        public void PrintReceipt(String header, String body) throws PrinterException {
 
+            this.header = header;
+            this.body = body;
             printerJob = PrinterJob.getPrinterJob();
-            pageFormat = printerJob.defaultPage(); // Getting the page format.
+            pageFormat = printerJob.defaultPage(); // Getting the page format
 
-            paper = new Paper(); // Create a new paper..
+            paper = new Paper(); // Create a new paper
 
-            // If you are working on printer rather than Thermal printers
-            // then change the width and height accordingly.
 
-            // I set them to 1000 value because that was for
-            // receipt which will not be larger than 1000 points
-            // actually this height does not mean the height of
-            // paper get out from the printer, this is the height
-            // of the printable area which you can use.
+            // For receipt which will not be larger than 1000 points
             int width = 216;
             int height = 1000;
-
-            // width = totalWidthOfPage - (MARGIN * 2);
-            // height = numberOfLines * 10 - (MARGIN * 2);
 
             paper.setImageableArea(MARGIN, MARGIN, width, height);
             pageFormat.setPaper(paper);
@@ -62,11 +57,19 @@ public class Print implements Printable {
 
             Graphics2D g2d = (Graphics2D) graphics;
             g2d.setColor(Color.black);
-
-            g2d.setFont(new Font("Times New Roman", Font.BOLD, 12));
-            g2d.drawString(spaces(10)+"CITY AUTO", 4, 10);
-            g2d.setFont(new Font("Times New Roman", Font.PLAIN, 10));
-            g2d.drawString(spaces(4)+"Address..", 0, 22);
+            int size = 12;
+            int y= 0;
+            g2d.setFont(new Font("Times New Roman", Font.BOLD, size));
+            for (String line : header.split(System.lineSeparator())){
+                y += size;
+                g2d.drawString(line, 4, y); //align right
+            }
+            size = 10;
+            g2d.setFont(new Font("Times New Roman", Font.PLAIN, size));
+            for (String line : body.split(System.lineSeparator())){
+                y += size;
+                g2d.drawString(line, 216 - graphics.getFontMetrics().stringWidth(line), y); // align right
+            }
 
             g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
@@ -74,19 +77,5 @@ public class Print implements Printable {
 
         }
 
-        /**
-         * Adding spaces into the num.
-         * @param num total spaces
-         * @return all spaces in string.
-         */
-        public String spaces(int num) {
-
-            String sp = "";
-            for(int i = 0; i < num; i++)
-                sp += " ";
-
-            return sp;
-
-        }
 
 }

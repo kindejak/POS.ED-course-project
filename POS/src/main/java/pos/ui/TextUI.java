@@ -3,9 +3,7 @@ package pos.ui;
 
 import pos.app.App;
 
-import java.awt.print.PrinterException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.awt.print.PrinterException;import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -36,37 +34,35 @@ public class TextUI {
                    "       2. Products menu\n" +
                    "       3. Orders menu\n" +
                    "       4. Cash register \n" +
-                   "       5. Settings \n" +
                    "       0. Exit \n");
-           int choice = sc.nextInt();
-           switch (choice){
-               case 0:
-                   cont = false;
-                   break;
-               case 1:
-                   saveAndLoadMenu();
-                   break;
-               case 2:
-                   productsMenu();
-                   break;
-               case 3:
-                   ordersMenu();
-                   break;
-               case 4:
-                   cashRegisterMenu();
-                   break;
-               case 5:
-                   settingsMenu();
-                   break;
-               default:
-                   System.out.println("Wrong input.");
+           try {
+               int choice = Integer.parseInt(sc.nextLine());
+               switch (choice){
+                   case 0:
+                       cont = false;
+                       break;
+                   case 1:
+                       saveAndLoadMenu();
+                       break;
+                   case 2:
+                       productsMenu();
+                       break;
+                   case 3:
+                       ordersMenu();
+                       break;
+                   case 4:
+                       cashRegisterMenu();
+                       break;
+                   default:
+                       System.out.println("Wrong input.");
+               }
+           } catch (NumberFormatException e){
+               logger.log(Level.INFO, "Wrong input.");
            }
+
        }
     }
 
-    private static void settingsMenu() {
-        System.out.println("Not supported yet.");
-    }
 
     private static void cashRegisterMenu() {
         Scanner sc = new Scanner(System.in);
@@ -88,17 +84,17 @@ public class TextUI {
             try {
                 id = app.createOrder(idArr);
             } catch (NumberFormatException e) {
-                logger.log(Level.INFO, "Non-valid number was entered." + idArr.toString(), e);
+                logger.log(Level.INFO, "Non-valid number was entered." + idArr.toString());
             } catch (NoSuchElementException e) {
-                logger.log(Level.INFO, "No such product exists.", e);
+                logger.log(Level.INFO, "No such product exists.");
             }
             if (input.equals("print")){
                 try {
                     app.printReceipt(id);
                 } catch (PrinterException e){
-                    logger.log(Level.INFO, "Problem with printing bill occurred." + e.getMessage(), e);
+                    logger.log(Level.INFO, "Problem with printing bill occurred." + e.getMessage());
                 } catch (IOException e) {
-                    logger.log(Level.INFO, "Problem with printing bill occurred.", e);
+                    logger.log(Level.INFO, "Problem with printing bill occurred.");
                 } finally {
                     input = sc.nextLine();
                 }
@@ -108,7 +104,7 @@ public class TextUI {
 
     private static void ordersMenu() {
         boolean cont = true;
-        int choice;
+        int choice = -1;
         Scanner sc = new Scanner(System.in);
         while (cont){
             System.out.print(" === ORDERS MENU === \n");
@@ -118,9 +114,12 @@ public class TextUI {
                     "       4. View all orders\n" +
                     "       5. Process order\n" +
                     "       0. Exit \n");
-            choice = sc.nextInt();
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e){
+                logger.log(Level.INFO, "Wrong input.");
+            }
             StringBuilder sb = new StringBuilder();
-            sc.nextLine();
             ArrayList<String> idArr = new ArrayList<>();
             String productId;
             int id;
@@ -138,9 +137,9 @@ public class TextUI {
                     try {
                         System.out.println(app.createOrder(idArr));
                     } catch (NumberFormatException e) {
-                        logger.log(Level.INFO, "Non-valid number was entered.", e);
+                        logger.log(Level.INFO, "Non-valid number was entered.");
                     } catch (NoSuchElementException e) {
-                        logger.log(Level.INFO, "No such product exists.", e);
+                        logger.log(Level.INFO, "No such product exists.");
                     }
                     idArr.clear();
                     break;
@@ -169,14 +168,23 @@ public class TextUI {
                     System.out.println(app.getAllOrders());
                     break;
                 case 5:
+                    int idLoad = 0;
+                    System.out.println("Order id:");
                     try {
-                        id = sc.nextInt();
-                        if (app.processOrder(id)) {
-
+                        idLoad = Integer.parseInt(sc.nextLine());
+                    } catch (NumberFormatException e){
+                        logger.log(Level.INFO, "Wrong input.");
+                    }
+                    try {
+                        if (app.processOrder(idLoad)) {
+                            System.out.println("Order processed");
+                        } else {
+                            System.out.println("Order couldn't be processed");
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        logger.log(Level.INFO, "Order couldn't be processed", e);
                     }
+                    break;
                 default:
                     break;
             }
@@ -185,7 +193,7 @@ public class TextUI {
 
     private static void productsMenu() {
         boolean cont = true;
-        int choice;
+        int choice = -1;
         Scanner sc = new Scanner(System.in);
         while (cont){
             System.out.printf(" === PRODUCTS MENU === \n");
@@ -196,10 +204,13 @@ public class TextUI {
                     "       5. Search product \n" +
                     "       6. View all products sorted by attribute\n" +
                     "       0. Exit \n");
-            choice = sc.nextInt();
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e){
+                logger.log(Level.INFO, "Wrong input.");
+            }
             String[] attributeNames =  {"name=","description=","price=","stock=","vat=","ean="};
             StringBuilder sb = new StringBuilder();
-            sc.nextLine();
             switch (choice){
                 case 0:
                     cont = false;
@@ -237,7 +248,7 @@ public class TextUI {
                     try {
                         System.out.println(app.getProduct(ean));
                     } catch (NoSuchElementException e) {
-                        logger.log(Level.INFO, "Product of this ID does not exists.", e);
+                        logger.log(Level.INFO, "Product of this ID does not exists.");
                     }
                     break;
                 case 5:
@@ -257,7 +268,7 @@ public class TextUI {
     private static void saveAndLoadMenu() {
 
         boolean cont = true;
-        int choice;
+        int choice = -1;
         Scanner sc = new Scanner(System.in);
         while (cont){
             System.out.print(" === SAVE/LOAD MENU === \n");
@@ -266,8 +277,11 @@ public class TextUI {
                     "       3. Save .json to standard path \n" +
                     "       4. Load .json from standard path \n" +
                     "       0. Exit \n");
-            choice = sc.nextInt();
-            sc.nextLine();
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e){
+                logger.log(Level.INFO, "Wrong input.");
+            }
             switch (choice){
                 case 0:
                     cont = false;
@@ -286,9 +300,9 @@ public class TextUI {
                         app.loadFile("products.bin","product");
                         app.loadFile("orders.bin","order");
                     } catch (IOException e) {
-                        logger.log(Level.INFO, "Problem with loading file occurred.", e);
+                        logger.log(Level.INFO, "Problem with loading file occurred.");
                     } catch (ClassNotFoundException e) {
-                        logger.log(Level.INFO, "Class tht was supposed to be saved does not exist", e);
+                        logger.log(Level.INFO, "Class tht was supposed to be saved does not exist");
                     }
                     break;
                 case 3:
@@ -296,9 +310,9 @@ public class TextUI {
                         app.saveFile("products.json","product");
                         app.saveFile("orders.json","order");
                     } catch (IOException e) {
-                        logger.log(Level.INFO, "Problem with saving file occurred.", e);
+                        logger.log(Level.INFO, "Problem with saving file occurred.");
                     } catch (ClassNotFoundException e) {
-                        logger.log(Level.INFO, "Class tht was supposed to be saved does not exist", e);
+                        logger.log(Level.INFO, "Class tht was supposed to be saved does not exist");
                     }
                     break;
                 case 4:
@@ -306,9 +320,9 @@ public class TextUI {
                         app.loadFile("products.json","product");
                         app.loadFile("orders.json","order");
                     } catch (IOException e) {
-                        logger.log(Level.INFO, "Problem with loading file occurred.", e);
+                        logger.log(Level.INFO, "Problem with loading file occurred.");
                     } catch (ClassNotFoundException e) {
-                        logger.log(Level.INFO, "Class tht was supposed to be saved does not exist", e);
+                        logger.log(Level.INFO, "Class tht was supposed to be saved does not exist");
                     }
                     break;
                 default:

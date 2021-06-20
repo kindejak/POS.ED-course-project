@@ -1,8 +1,10 @@
 package pos.app;
 
+import pos.utils.AttributesParser;
+
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class Product extends App implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -10,13 +12,6 @@ public class Product implements Serializable {
     private int stock;
     private int vat;
     private String ean;
-
-    private static final int ATTRIBUTE_NAME_LENGTH0 = 5;
-    private static final int ATTRIBUTE_NAME_LENGTH1 = 12;
-    private static final int ATTRIBUTE_NAME_LENGTH2 = 6;
-    private static final int ATTRIBUTE_NAME_LENGTH3 = 6;
-    private static final int ATTRIBUTE_NAME_LENGTH4 = 4;
-    private static final int ATTRIBUTE_NAME_LENGTH5 = 4;
 
     public Product()
     {
@@ -30,12 +25,12 @@ public class Product implements Serializable {
     public Product(int id,String attributes){
         this.id = id;
         String[] splitAttributes = attributes.split(";");
-        this.name = splitAttributes[0].substring(ATTRIBUTE_NAME_LENGTH0);
-        this.description = splitAttributes[1].substring(ATTRIBUTE_NAME_LENGTH1);
-        this.price = Double.parseDouble(splitAttributes[2].substring(ATTRIBUTE_NAME_LENGTH2));
-        this.stock = Integer.parseInt(splitAttributes[3].substring(ATTRIBUTE_NAME_LENGTH3));
-        this.vat = Integer.parseInt(splitAttributes[4].substring(ATTRIBUTE_NAME_LENGTH4));
-        this.ean = splitAttributes[5].substring(ATTRIBUTE_NAME_LENGTH5);
+        this.name = splitAttributes[0].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH0);
+        this.description = splitAttributes[1].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH1);
+        this.price = Double.parseDouble(splitAttributes[2].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH2));
+        this.stock = Integer.parseInt(splitAttributes[3].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH3));
+        this.vat = Integer.parseInt(splitAttributes[4].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH4));
+        this.ean = splitAttributes[5].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH5);
     }
 
     public static void main(String[] args) {

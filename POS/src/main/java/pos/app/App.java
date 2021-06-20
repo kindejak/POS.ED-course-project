@@ -1,6 +1,7 @@
 package pos.app;
 
 
+import pos.ui.TextUI;
 import pos.utils.AttributesParser;
 import pos.utils.MainPosInterface;
 
@@ -8,10 +9,13 @@ import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class App implements MainPosInterface {
+import static java.lang.Math.abs;
+
+public class App extends TextUI implements MainPosInterface {
 
     final static int FIRST_ID_ALLOWED = 1000;
     final static String PATH = "data" + File.separator;
@@ -188,17 +192,13 @@ public class App implements MainPosInterface {
         if (sortBy.equals("price")){
             Collections.sort(arrForSorting, new Comparator<Product>() {
                 @Override
-                public int compare(Product o1, Product o2) {
-                    return o1.getName().compareTo(o2.getName());
-                }
+                public int compare(Product o1, Product o2) { return (int) ( o1.getPrice() - o2.getPrice()); }
             });
         }
-        if (sortBy.equals("vat")){
+        if (sortBy.equals("stock")){
             Collections.sort(arrForSorting, new Comparator<Product>() {
                 @Override
-                public int compare(Product o1, Product o2) {
-                    return o1.getName().compareTo(o2.getName());
-                }
+                public int compare(Product o1, Product o2) { return (int) ( o1.getStock() - o2.getStock()); }
             });
         }
         StringBuilder sb = new StringBuilder();
@@ -354,13 +354,24 @@ public class App implements MainPosInterface {
         if (o == null){
             return false;
         }
-        String dateTime = o.getTime().toString();
-        String[] header = new String[3];
-        header[0]=       "   ****Super Market****       ";
-        header[1]=       "Date: " + dateTime;
-        header[2]=       "---------------------------------";
+        String dateTime = o.getTime().format(DateTimeFormatter.ofPattern("dd. MM. yyyy HH:mm"));
+        String header=       "   ****Super Tea Hut**** "+ System.lineSeparator() +" Date: " + dateTime + System.lineSeparator() +"---------------------------------------------------------------------";
+        String body = "";
+        StringBuilder sb = new StringBuilder();
+        for(ProductQuantity pq : o.getItems()){
+            Product p = pq.getProduct();
+            sb.append(p.getName());
+            sb.append("     X ");
+            sb.append(pq.getQuantity());
+            sb.append("    ");
+            sb.append(p.getPrice()* pq.getQuantity());
+            sb.append(System.lineSeparator());
+        }
+        sb.append("Total ");
+        sb.append(o.getTotalPrice());
+        sb.append(System.lineSeparator());
         Print printer = new Print();
-        printer.PrintReceipt();
+        printer.PrintReceipt(header,sb.toString());
         return true;
 
     }

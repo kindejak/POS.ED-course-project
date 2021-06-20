@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>pos</OriginalElement>
+  <nodes>
+    <node x="276.0" y="365.0">pos.utils.AttributesParser</node>
+    <node x="540.5" y="365.0">pos.app.Settings</node>
+    <node x="538.0" y="461.0">pos.utils.SettingsInterface</node>
+    <node x="0.0" y="365.0">pos.app.Order</node>
+    <node x="429.0" y="576.0">pos.ui.TextUI</node>
+    <node x="0.0" y="576.0">pos.app.Print</node>
+    <node x="0.0" y="743.0">pos.app.FileHandler</node>
+    <node x="225.0" y="576.0">pos.app.ProductQuantity</node>
+    <node x="0.0" y="0.0">pos.app.Product</node>
+    <node x="262.0" y="0.0">pos.app.App</node>
+    <node x="288.5" y="162.0">pos.utils.MainPosInterface</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="pos.app.App" target="pos.utils.MainPosInterface" relationship="REALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="pos.app.Settings" target="pos.utils.SettingsInterface" relationship="REALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Generic" zoom="1.0" showDependencies="false" x="350.5" y="399.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

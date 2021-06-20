@@ -4,7 +4,7 @@ import pos.app.Product;
 
 import java.io.Serializable;
 
-public class ProductQuantity implements Serializable {
+public class ProductQuantity extends Order implements Serializable {
     private Product product;
     private int quantity;
 
