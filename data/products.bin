@@ -1,0 +1,5 @@
+id=1000;name=Pai Mu Tan;description=white tea - 100g;price=130.0;stock=15;vat=15;ean=14648645325135
+id=1001;name=2021 Du Yun Mao Jian;description=Ochmýřené tipsy z Du Yun - Pečlivě zpracovaný čaj drobného lehce zakrouceného listu s přiměřeným podílem tenkých stříbřitých tipsů.;price=330.0;stock=25;vat=15;ean=68468543558
+id=1002;name=Darjeeling FTGFOP-1;description=Velmi dobrý darjeelingský čaj z jarní sklizně (First Flush) z organické zahrady Risheehat;price=260.0;stock=35;vat=15;ean=6846858697878
+id=1003;name=2021 Dian Hong Jin Zhen;description="Zlaté jehličky" – výtečná sorta červeného čaje z oblasti Menghai v provincii Yunnan. ;price=160.0;stock=100;vat=15;ean=215847773558587
+id=1004;name=2020 Keemun Mao Feng;description=černý čaj z oblasti Keemun;price=170.0;stock=51;vat=15;ean=665467684843843

@@ -33,6 +33,7 @@ Aplikace POS.ED je jednoduchou POS aplikací. Tento projekt byl vypracován pro 
 ![](./img/model.png)
 
 ### Datové struktury
+## JSON
 #### Product
 	{
 	   "id":product_id,
@@ -77,6 +78,9 @@ Aplikace POS.ED je jednoduchou POS aplikací. Tento projekt byl vypracován pro 
           "canceled":false,
           "paid":false
        }
+
+## Binary
+Binární soubory mohou být vytvořeny pouze uvnitř aplikace
 
 ## Externí knihovny
 

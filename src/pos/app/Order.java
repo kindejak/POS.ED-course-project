@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Order extends App implements Serializable {
+public class Order implements Serializable {
     private int id;
     private LocalDateTime time;
     private ArrayList<ProductQuantity> items;
@@ -30,6 +30,7 @@ public class Order extends App implements Serializable {
         this.items = items;
         updateTotalPrice();
     }
+
 
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;

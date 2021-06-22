@@ -2,7 +2,7 @@ package pos.utils;
 
 import pos.app.Product;
 
-public class AttributesParser extends Product {
+public class AttributesParser {
 
 
     public static final int ATTRIBUTE_NAME_LENGTH0 = 5;

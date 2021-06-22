@@ -3,7 +3,7 @@ package pos.app;
 import java.awt.*;
 import java.awt.print.*;
 
-public class Print extends App implements Printable {
+public class Print implements Printable {
 
         // Attributes..
         private PrinterJob printerJob;

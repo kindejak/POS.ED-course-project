@@ -1,10 +1,11 @@
 package pos.app;
 
+import pos.app.Order;
 import pos.app.Product;
 
 import java.io.Serializable;
 
-public class ProductQuantity extends Order implements Serializable {
+public class ProductQuantity implements Serializable {
     private Product product;
     private int quantity;
 

@@ -1,7 +1,6 @@
 package pos.app;
 
 
-import pos.ui.TextUI;
 import pos.utils.AttributesParser;
 import pos.utils.MainPosInterface;
 
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
-public class App extends TextUI implements MainPosInterface {
+public class App implements MainPosInterface {
 
     final static int FIRST_ID_ALLOWED = 1000;
     final static String PATH = "data" + File.separator;

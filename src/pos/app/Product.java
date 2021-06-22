@@ -4,7 +4,7 @@ import pos.utils.AttributesParser;
 
 import java.io.Serializable;
 
-public class Product extends App implements Serializable {
+public class Product implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -31,6 +31,17 @@ public class Product extends App implements Serializable {
         this.stock = Integer.parseInt(splitAttributes[3].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH3));
         this.vat = Integer.parseInt(splitAttributes[4].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH4));
         this.ean = splitAttributes[5].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH5);
+    }
+
+    public Product(String attributes){
+        String[] splitAttributes = attributes.split(";");
+        this.id = Integer.parseInt(splitAttributes[0].substring(3));
+        this.name = splitAttributes[1].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH0);
+        this.description = splitAttributes[2].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH1);
+        this.price = Double.parseDouble(splitAttributes[3].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH2));
+        this.stock = Integer.parseInt(splitAttributes[4].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH3));
+        this.vat = Integer.parseInt(splitAttributes[5].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH4));
+        this.ean = splitAttributes[6].substring(AttributesParser.ATTRIBUTE_NAME_LENGTH5);
     }
 
     public static void main(String[] args) {
